@@ -3,9 +3,10 @@ const app = express();
 require("dotenv").config();
 const flashcardsRouter = require("./routes/flashcardsRouter");
 const usersRouter = require("./routes/usersRouter");
+const authMiddleware = require("./middleware/authMiddleware");
 
 app.use(express.json());
-app.use("/flashcards", flashcardsRouter);
+app.use("/flashcards", authMiddleware, flashcardsRouter);
 app.use("/users", usersRouter);
 
 app.listen(process.env.PORT, () =>
