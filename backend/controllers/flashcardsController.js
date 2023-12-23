@@ -8,21 +8,31 @@ const getFlashcards = (req, res) => {
     res.json(result);
   });
 };
+
 const postFlashcard = (req, res) => {
   const { question, answer, category, difficulty } = req.body;
 
-  const q =
+  const insertQuery =
     "INSERT INTO flashcards (question, answer, category, difficulty, user_id) VALUES (?, ?, ?, ?, ?)";
 
   db.query(
-    q,
+    insertQuery,
     [question, answer, category, difficulty, req.user_id],
     (err, result) => {
       if (err) return res.status(500).json({ error: "Internal Server Error" });
-      res.json(result);
     }
   );
+
+  const selectQuery = "SELECT * FROM flashcards WHERE id = LAST_INSERT_ID()";
+  db.query(selectQuery, (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+    const newFlashcard = result[0];
+    res.json(newFlashcard);
+  });
 };
+
 const updateFlashcard = (req, res) => {
   const id = req.params.id;
   const { question, answer, category, difficulty } = req.body;

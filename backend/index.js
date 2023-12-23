@@ -4,8 +4,10 @@ require("dotenv").config();
 const flashcardsRouter = require("./routes/flashcardsRouter");
 const usersRouter = require("./routes/usersRouter");
 const authMiddleware = require("./middleware/authMiddleware");
+const cors = require("cors");
 
 app.use(express.json());
+app.use(cors());
 app.use("/flashcards", authMiddleware, flashcardsRouter);
 app.use("/users", usersRouter);
 
