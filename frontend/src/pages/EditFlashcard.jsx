@@ -1,31 +1,36 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { postFlashcard } from "../redux/appSlice";
+import { updateFlashcard } from "../redux/appSlice";
 
-function NewFlashcard() {
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [category, setCategory] = useState("");
-  const [difficulty, setDifficulty] = useState("");
+function EditFlashcard({
+  id,
+  question,
+  answer,
+  category,
+  difficulty,
+  setIsEdited,
+}) {
+  const [data, setData] = useState({ question, answer, category, difficulty });
 
   const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setData((prevState) => ({ ...prevState, [e.target.id]: e.target.value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newFlashcard = {
+    const updatedFlashcard = {
+      id,
       question,
       answer,
       category,
       difficulty,
     };
 
-    dispatch(postFlashcard(newFlashcard));
-
-    setQuestion("");
-    setAnswer("");
-    setCategory("");
-    setDifficulty("");
+    dispatch(updateFlashcard(updatedFlashcard));
+    setIsEdited(false);
   };
 
   return (
@@ -34,16 +39,16 @@ function NewFlashcard() {
       <input
         type="text"
         id="question"
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
+        value={data.question}
+        onChange={handleChange}
         required
       />
 
       <label htmlFor="answer">Answer:</label>
       <textarea
         id="answer"
-        value={answer}
-        onChange={(e) => setAnswer(e.target.value)}
+        value={data.answer}
+        onChange={handleChange}
         required
       ></textarea>
 
@@ -51,16 +56,16 @@ function NewFlashcard() {
       <input
         type="text"
         id="category"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
+        value={data.category}
+        onChange={handleChange}
       />
 
       <label htmlFor="difficulty">Difficulty:</label>
       <input
         type="text"
         id="difficulty"
-        value={difficulty}
-        onChange={(e) => setDifficulty(e.target.value)}
+        value={data.difficulty}
+        onChange={handleChange}
       />
 
       <button type="submit">Add Flashcard</button>
@@ -68,4 +73,4 @@ function NewFlashcard() {
   );
 }
 
-export default NewFlashcard;
+export default EditFlashcard;

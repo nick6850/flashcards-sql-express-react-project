@@ -50,6 +50,35 @@ export const postFlashcard = createAsyncThunk(
   }
 );
 
+export const updateFlashcard = createAsyncThunk(
+  "appSlice/updateFlashcard",
+  async (updatedFlashcard) => {
+    const { id, ...flashcardData } = updatedFlashcard;
+    const res = await axios.update(
+      `http://localhost:3001/flashcards/${id}`,
+      flashcardData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return res.data;
+  }
+);
+
+export const deleteFlashcard = createAsyncThunk(
+  "appSlice/deleteFlashcard",
+  async (id) => {
+    const res = await axios.delete(`http://localhost:3001/flashcards/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return id;
+  }
+);
+
 export const appSlice = createSlice({
   name: "appSlice",
   initialState,
@@ -85,6 +114,32 @@ export const appSlice = createSlice({
       state.flashcards.push(action.payload);
     });
     builder.addCase(postFlashcard.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(updateFlashcard.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateFlashcard.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.flashcards = state.flashcards.map((flashcard) =>
+        flashcard.id === action.payload.id ? action.payload : flashcard
+      );
+    });
+    builder.addCase(updateFlashcard.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(deleteFlashcard.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteFlashcard.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.flashcards = state.flashcards.filter(
+        (flashcard) => flashcard.id !== action.payload
+      );
+    });
+    builder.addCase(deleteFlashcard.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error.message;
     });

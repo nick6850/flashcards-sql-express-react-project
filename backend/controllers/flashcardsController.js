@@ -74,7 +74,14 @@ const updateFlashcard = (req, res) => {
       });
     }
 
-    res.status(200).json(result);
+    const selectQuery = "SELECT * FROM flashcards WHERE id = ?";
+    db.query(selectQuery, id, (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+
+      res.json(result[0]);
+    });
   });
 };
 const deleteFlashcard = (req, res) => {
