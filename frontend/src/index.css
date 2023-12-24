@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.slick-prev:before,
+.slick-next:before {
+  color: rgba(0, 0, 0, 0.838);
+  opacity: 3;
+  font-size: 25px;
+}
+
+.slick-prev {
+  left: -35px;
+}
+
+.slick-next {
+  right: -35px;
+}

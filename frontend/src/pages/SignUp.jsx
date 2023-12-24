@@ -36,6 +36,9 @@ function SignUp() {
   return (
     <div>
       <h1>Sign Up</h1>
+      <button type="button" className="slick-next ">
+        Next
+      </button>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input

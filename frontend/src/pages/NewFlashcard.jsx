@@ -29,12 +29,13 @@ function NewFlashcard() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex flex-col m-auto max-w-96">
       <label htmlFor="question">Question:</label>
       <input
         type="text"
         id="question"
         value={question}
+        className="border"
         onChange={(e) => setQuestion(e.target.value)}
         required
       />
@@ -43,6 +44,7 @@ function NewFlashcard() {
       <textarea
         id="answer"
         value={answer}
+        className="border"
         onChange={(e) => setAnswer(e.target.value)}
         required
       ></textarea>
@@ -52,6 +54,7 @@ function NewFlashcard() {
         type="text"
         id="category"
         value={category}
+        className="border"
         onChange={(e) => setCategory(e.target.value)}
       />
 
@@ -60,6 +63,7 @@ function NewFlashcard() {
         type="text"
         id="difficulty"
         value={difficulty}
+        className="border"
         onChange={(e) => setDifficulty(e.target.value)}
       />
 
