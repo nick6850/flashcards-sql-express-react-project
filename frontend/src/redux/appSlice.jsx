@@ -5,6 +5,7 @@ const initialState = {
   flashcards: [],
   isSignedIn: false,
   isLoading: false,
+  isSuccess: false,
   error: null,
 };
 
@@ -18,6 +19,17 @@ export const signIn = createAsyncThunk(
       userCredentials
     );
     localStorage.setItem("token", res.data.token);
+    return res.data;
+  }
+);
+
+export const signUp = createAsyncThunk(
+  "appSlice/signUp",
+  async (userCredentials) => {
+    const res = await axios.post(
+      "http://localhost:3001/users/signup",
+      userCredentials
+    );
     return res.data;
   }
 );
@@ -54,7 +66,7 @@ export const updateFlashcard = createAsyncThunk(
   "appSlice/updateFlashcard",
   async (updatedFlashcard) => {
     const { id, ...flashcardData } = updatedFlashcard;
-    const res = await axios.update(
+    const res = await axios.put(
       `http://localhost:3001/flashcards/${id}`,
       flashcardData,
       {
@@ -63,6 +75,7 @@ export const updateFlashcard = createAsyncThunk(
         },
       }
     );
+
     return res.data;
   }
 );
@@ -92,6 +105,16 @@ export const appSlice = createSlice({
       state.isSignedIn = true;
     });
     builder.addCase(signIn.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(signUp.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(signUp.fulfilled, (state, action) => {
+      state.isLoading = false;
+    });
+    builder.addCase(signUp.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error.message;
     });

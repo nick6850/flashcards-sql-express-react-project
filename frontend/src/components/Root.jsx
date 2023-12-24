@@ -1,9 +1,12 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 function Root() {
   return (
     <>
-      <navbar>Hello</navbar>
+      <nav>
+        <NavLink to="/signin">Sign In</NavLink>
+        <NavLink to="/signup">Sign Up</NavLink>
+      </nav>
       <Outlet />
     </>
   );

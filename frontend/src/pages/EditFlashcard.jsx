@@ -23,10 +23,10 @@ function EditFlashcard({
 
     const updatedFlashcard = {
       id,
-      question,
-      answer,
-      category,
-      difficulty,
+      question: data.question,
+      answer: data.answer,
+      category: data.category,
+      difficulty: data.difficulty,
     };
 
     dispatch(updateFlashcard(updatedFlashcard));
