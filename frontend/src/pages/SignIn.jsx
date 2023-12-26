@@ -31,11 +31,12 @@ function SignIn() {
   }
 
   return (
-    <div>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-96 m-auto">
+      <h1 className="text-center mb-3 text-xl">Sign In</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col border p-3">
         <label htmlFor="email">Email:</label>
         <input
+          className="border"
           type="email"
           id="email"
           value={email}
@@ -43,8 +44,11 @@ function SignIn() {
           required
         />
 
-        <label htmlFor="password">Password:</label>
+        <label className="mt-3" htmlFor="password">
+          Password:
+        </label>
         <input
+          className="border"
           type="password"
           id="password"
           value={password}
@@ -52,7 +56,9 @@ function SignIn() {
           required
         />
 
-        <button type="submit">Sign In</button>
+        <button className="mt-3" type="submit">
+          Sign In
+        </button>
       </form>
     </div>
   );

@@ -34,9 +34,10 @@ function EditFlashcard({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex flex-col border p-2">
       <label htmlFor="question">Question:</label>
       <input
+        className="border"
         type="text"
         id="question"
         value={data.question}
@@ -44,31 +45,45 @@ function EditFlashcard({
         required
       />
 
-      <label htmlFor="answer">Answer:</label>
+      <label className="mt-1" htmlFor="answer">
+        Answer:
+      </label>
       <textarea
+        className="border"
         id="answer"
         value={data.answer}
         onChange={handleChange}
         required
       ></textarea>
 
-      <label htmlFor="category">Category:</label>
+      <label className="mt-1" htmlFor="category">
+        Category:
+      </label>
       <input
+        className="border"
         type="text"
         id="category"
         value={data.category}
         onChange={handleChange}
       />
 
-      <label htmlFor="difficulty">Difficulty:</label>
-      <input
-        type="text"
+      <label className="mt-1" htmlFor="difficulty">
+        Difficulty:
+      </label>
+      <select
         id="difficulty"
         value={data.difficulty}
         onChange={handleChange}
-      />
+        className="border bg-white p-1"
+      >
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+      </select>
 
-      <button type="submit">Add Flashcard</button>
+      <button className="mt-1" type="submit">
+        Update flashcard
+      </button>
     </form>
   );
 }

@@ -16,6 +16,7 @@ import SignUp from "./pages/SignUp";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import NewFlashcard from "./pages/NewFlashcard";
+import Error from "./pages/Error";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route index element={<Flashcards />} />
       <Route path="signin" element={<SignIn />} />
       <Route path="signup" element={<SignUp />} />
+      <Route path="*" element={<Error />} />
     </Route>
   )
 );

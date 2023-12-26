@@ -40,7 +40,9 @@ function NewFlashcard() {
         required
       />
 
-      <label htmlFor="answer">Answer:</label>
+      <label className="mt-1" htmlFor="answer">
+        Answer:
+      </label>
       <textarea
         id="answer"
         value={answer}
@@ -49,7 +51,9 @@ function NewFlashcard() {
         required
       ></textarea>
 
-      <label htmlFor="category">Category:</label>
+      <label className="mt-1" htmlFor="category">
+        Category:
+      </label>
       <input
         type="text"
         id="category"
@@ -58,16 +62,21 @@ function NewFlashcard() {
         onChange={(e) => setCategory(e.target.value)}
       />
 
-      <label htmlFor="difficulty">Difficulty:</label>
-      <input
-        type="text"
+      <label className="mt-1" htmlFor="difficulty">
+        Difficulty:
+      </label>
+      <select
         id="difficulty"
         value={difficulty}
-        className="border"
         onChange={(e) => setDifficulty(e.target.value)}
-      />
+        className="border bg-white p-1"
+      >
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+      </select>
 
-      <button type="submit">Add Flashcard</button>
+      <button className="mt-2">Add Flashcard</button>
     </form>
   );
 }

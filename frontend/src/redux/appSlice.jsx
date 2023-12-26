@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
   flashcards: [],
-  isSignedIn: false,
+  isSignedIn: localStorage.getItem("token") ? true : false,
   isLoading: false,
   isSuccess: false,
   error: null,
@@ -95,7 +95,12 @@ export const deleteFlashcard = createAsyncThunk(
 export const appSlice = createSlice({
   name: "appSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    signout: (state) => {
+      state.isSignedIn = false;
+      localStorage.removeItem("token");
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(signIn.pending, (state) => {
       state.isLoading = true;
@@ -113,6 +118,7 @@ export const appSlice = createSlice({
     });
     builder.addCase(signUp.fulfilled, (state, action) => {
       state.isLoading = false;
+      state.isSuccess = true;
     });
     builder.addCase(signUp.rejected, (state, action) => {
       state.isLoading = false;
@@ -170,3 +176,4 @@ export const appSlice = createSlice({
 });
 
 export default appSlice.reducer;
+export const { signout } = appSlice.actions;

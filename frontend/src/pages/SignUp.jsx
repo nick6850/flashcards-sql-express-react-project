@@ -33,15 +33,17 @@ function SignUp() {
     return <Navigate to="/" replace={true} />;
   }
 
+  if (isSuccess) {
+    return <Navigate to="/signin" replace={true} />;
+  }
+
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <button type="button" className="slick-next ">
-        Next
-      </button>
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-96 m-auto">
+      <h1 className="text-center mb-3 text-xl">Sign Up</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col border p-3">
         <label htmlFor="username">Username:</label>
         <input
+          className="border"
           type="username"
           id="username"
           value={username}
@@ -49,8 +51,11 @@ function SignUp() {
           required
         />
 
-        <label htmlFor="email">Email:</label>
+        <label className="mt-3" htmlFor="email">
+          Email:
+        </label>
         <input
+          className="border"
           type="email"
           id="email"
           value={email}
@@ -58,8 +63,11 @@ function SignUp() {
           required
         />
 
-        <label htmlFor="password">Password:</label>
+        <label className="mt-3" htmlFor="password">
+          Password:
+        </label>
         <input
+          className="border"
           type="password"
           id="password"
           value={password}

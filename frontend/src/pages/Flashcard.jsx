@@ -15,7 +15,7 @@ function Flashcard(props) {
   }
 
   return (
-    <div>
+    <div className="mt-1">
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
         <div className="w-96 h-96 border p-4 flex flex-col justify-between">
           <div className="flex justify-between">
@@ -26,7 +26,7 @@ function Flashcard(props) {
             <div>
               <button
                 onClick={() => setIsEdited(true)}
-                className="bg-blue-900 text-white px-3 mb-3"
+                className="bg-blue-900 text-white px-3 mb-3 mr-1"
               >
                 Edit
               </button>
