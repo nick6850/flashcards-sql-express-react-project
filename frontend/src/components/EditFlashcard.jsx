@@ -81,7 +81,10 @@ function EditFlashcard({
         <option value="Hard">Hard</option>
       </select>
 
-      <button className="mt-1" type="submit">
+      <button
+        className="mt-1 bg-blue-900 text-white w-fit m-auto px-3 mt-5"
+        type="submit"
+      >
         Update flashcard
       </button>
     </form>

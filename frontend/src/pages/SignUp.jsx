@@ -39,7 +39,7 @@ function SignUp() {
 
   return (
     <div className="max-w-96 m-auto">
-      <h1 className="text-center mb-3 text-xl">Sign Up</h1>
+      <h1 className="text-center mb-3 text-2xl ">Sign Up</h1>
       <form onSubmit={handleSubmit} className="flex flex-col border p-3">
         <label htmlFor="username">Username:</label>
         <input
@@ -75,7 +75,12 @@ function SignUp() {
           required
         />
 
-        <button type="submit">Sign Up</button>
+        <button
+          className="bg-blue-600 text-white px-3 mt-3 w-fit m-auto"
+          type="submit"
+        >
+          Sign Up
+        </button>
       </form>
     </div>
   );

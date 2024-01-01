@@ -41,7 +41,7 @@ function Flashcard(props) {
           <h1 className="font-bold text-2xl break-words">{props.question}</h1>
 
           <button
-            className="w-fit self-center"
+            className="w-fit self-center text-white bg-green-800 px-2"
             onClick={() => setIsFlipped(true)}
           >
             See the answer

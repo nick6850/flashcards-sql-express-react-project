@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchFlashcards } from "../redux/appSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Flashcard from "./Flashcard";
+import Flashcard from "../components/Flashcard";
 import { Navigate, useSearchParams } from "react-router-dom";
-import NewFlashcard from "./NewFlashcard";
+import NewFlashcard from "../components/NewFlashcard";
 import Slider from "react-slick";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Flashcards() {
   const { flashcards, isLoggedIn } = useSelector((state) => state.appSlice);
+  const [isAddingNewCard, setIsAddingNewCard] = useState(false);
   let [searchParams, setSearchParams] = useSearchParams();
 
   const dispatch = useDispatch();
@@ -39,7 +40,19 @@ function Flashcards() {
 
   return (
     <div>
-      <NewFlashcard />
+      {isAddingNewCard ? (
+        <NewFlashcard setIsAddingNewCard={setIsAddingNewCard} />
+      ) : (
+        <div className="w-fit m-auto mt-3">
+          <textarea
+            cols="10"
+            rows="1"
+            placeholder="Add a new flashcard..."
+            className="w-96 border p-5"
+            onClick={() => setIsAddingNewCard(true)}
+          ></textarea>
+        </div>
+      )}
 
       {!flashcards.length ? (
         <h1 className="text-xl italic font-bold text-center mt-3">

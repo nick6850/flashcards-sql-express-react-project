@@ -32,7 +32,7 @@ function SignIn() {
 
   return (
     <div className="max-w-96 m-auto">
-      <h1 className="text-center mb-3 text-xl">Sign In</h1>
+      <h1 className="text-center mb-3 text-2xl">Sign In</h1>
       <form onSubmit={handleSubmit} className="flex flex-col border p-3">
         <label htmlFor="email">Email:</label>
         <input
@@ -56,7 +56,10 @@ function SignIn() {
           required
         />
 
-        <button className="mt-3" type="submit">
+        <button
+          className="mt-3 bg-green-600 text-white w-fit m-auto px-3"
+          type="submit"
+        >
           Sign In
         </button>
       </form>

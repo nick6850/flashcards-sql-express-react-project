@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postFlashcard } from "../redux/appSlice";
 
-function NewFlashcard() {
+function NewFlashcard({ setIsAddingNewCard }) {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [category, setCategory] = useState("");
@@ -30,6 +30,12 @@ function NewFlashcard() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col m-auto max-w-96">
+      <span
+        className="cursor-pointer bg-red-800 text-white w-min px-1 rounded-md text-l self-end"
+        onClick={() => setIsAddingNewCard(false)}
+      >
+        &#10005;
+      </span>
       <label htmlFor="question">Question:</label>
       <input
         type="text"
@@ -76,7 +82,9 @@ function NewFlashcard() {
         <option value="Hard">Hard</option>
       </select>
 
-      <button className="mt-2">Add Flashcard</button>
+      <button className="bg-green-800 text-white px-3 mt-3 w-fit m-auto">
+        Add Flashcard
+      </button>
     </form>
   );
 }

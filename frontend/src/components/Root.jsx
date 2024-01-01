@@ -9,9 +9,14 @@ function Root() {
 
   return (
     <>
-      <nav className="w-screen flex justify-end gap-2 p-3">
+      <div className=" border p-2 w-screen flex flex-col items-center mt-3 ">
+        <h1 className="text-6xl">StudyHub</h1>
+        <div className="italic text-center text-2xl">Your Hub for Learning</div>
+      </div>
+      <nav className="w-screen flex p-3 justify-end ">
         {isSignedIn ? (
           <button
+            className="bg-red-900 text-white px-3"
             onClick={() => {
               dispatch(signout());
               navigate("/signin");
@@ -20,13 +25,19 @@ function Root() {
             Log out
           </button>
         ) : (
-          <>
-            <NavLink to="/signin">Sign In</NavLink>
-            <NavLink to="/signup">Sign Up</NavLink>
-          </>
+          <div className="flex gap-2 ">
+            <NavLink to="/signin">
+              <span className="bg-green-600 px-2 py-1 text-white">Sign In</span>
+            </NavLink>
+            <NavLink to="/signup">
+              <span className="bg-blue-600 px-2 py-1 text-white">Sign Up</span>
+            </NavLink>
+          </div>
         )}
       </nav>
-      <Outlet />
+      <div className="mt-10">
+        <Outlet />
+      </div>
     </>
   );
 }
